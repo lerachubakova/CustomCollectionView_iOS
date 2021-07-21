@@ -108,8 +108,8 @@
 		CE65C83526A805710061D3BB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				CE65C83626A808AC0061D3BB /* Main */,
 				CE60ED7E26A7FAE000D23F16 /* LaunchScreen.storyboard */,
+				CE65C83626A808AC0061D3BB /* Main */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
