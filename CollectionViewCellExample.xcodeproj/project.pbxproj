@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		01B0E2800145BC67F3E33018 /* Pods_CollectionViewCellExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F286B85D13F8C18C905F2B /* Pods_CollectionViewCellExample.framework */; };
+		CE09300926A834AB0053098F /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09300826A834AB0053098F /* PinterestLayout.swift */; };
+		CE37DC8626A842F2001AF0CA /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37DC8526A842F2001AF0CA /* MyCell.swift */; };
 		CE60ED7426A7FADE00D23F16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60ED7326A7FADE00D23F16 /* AppDelegate.swift */; };
 		CE60ED7626A7FADE00D23F16 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60ED7526A7FADE00D23F16 /* SceneDelegate.swift */; };
 		CE60ED7826A7FADE00D23F16 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60ED7726A7FADE00D23F16 /* MainViewController.swift */; };
@@ -19,6 +21,8 @@
 /* Begin PBXFileReference section */
 		44F286B85D13F8C18C905F2B /* Pods_CollectionViewCellExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectionViewCellExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB1B9CE58A2C5F2D2ABB6AF /* Pods-CollectionViewCellExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionViewCellExample.release.xcconfig"; path = "Target Support Files/Pods-CollectionViewCellExample/Pods-CollectionViewCellExample.release.xcconfig"; sourceTree = "<group>"; };
+		CE09300826A834AB0053098F /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
+		CE37DC8526A842F2001AF0CA /* MyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
 		CE60ED7026A7FADE00D23F16 /* CollectionViewCellExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewCellExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE60ED7326A7FADE00D23F16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE60ED7526A7FADE00D23F16 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,8 +121,10 @@
 		CE65C83626A808AC0061D3BB /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				CE09300826A834AB0053098F /* PinterestLayout.swift */,
 				CE60ED7726A7FADE00D23F16 /* MainViewController.swift */,
 				CE60ED7926A7FADE00D23F16 /* Main.storyboard */,
+				CE37DC8526A842F2001AF0CA /* MyCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -237,6 +243,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE09300926A834AB0053098F /* PinterestLayout.swift in Sources */,
+				CE37DC8626A842F2001AF0CA /* MyCell.swift in Sources */,
 				CE60ED7826A7FADE00D23F16 /* MainViewController.swift in Sources */,
 				CE60ED7426A7FADE00D23F16 /* AppDelegate.swift in Sources */,
 				CE60ED7626A7FADE00D23F16 /* SceneDelegate.swift in Sources */,
@@ -394,7 +402,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vironit.CollectionViewCellExample.CollectionViewCellExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vironit.CollectionViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -414,7 +422,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vironit.CollectionViewCellExample.CollectionViewCellExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vironit.CollectionViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
