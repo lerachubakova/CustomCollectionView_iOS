@@ -123,10 +123,10 @@
 		CE65C83526A805710061D3BB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				CE09300826A834AB0053098F /* PinterestLayout.swift */,
-				CE6952F626A96B0300E51D63 /* Header */,
 				CE60ED7E26A7FAE000D23F16 /* LaunchScreen.storyboard */,
+				CE09300826A834AB0053098F /* PinterestLayout.swift */,
 				CE65C83626A808AC0061D3BB /* Main */,
+				CE6952F626A96B0300E51D63 /* Header */,
 				CE8335B726AAA1A1004023A4 /* ProfileCell */,
 			);
 			path = Modules;
