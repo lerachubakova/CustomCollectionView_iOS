@@ -33,11 +33,11 @@ class MyCell: UICollectionViewCell {
     }
     
     func startPlayer() {
+        self.player?.play()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(playerItemDidReachEnd(notification:)),
                                                name: .AVPlayerItemDidPlayToEndTime,
                                                object: player?.currentItem)
-        self.player?.play()
     }
     
     func deletePlayer() {
