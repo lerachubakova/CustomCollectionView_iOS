@@ -20,6 +20,7 @@
 		CE6952F526A96B0000E51D63 /* HeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6952F326A96B0000E51D63 /* HeaderCollectionReusableView.xib */; };
 		CE8335BE26AAA1F3004023A4 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8335BC26AAA1F3004023A4 /* ProfileCell.swift */; };
 		CE8335BF26AAA1F3004023A4 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8335BD26AAA1F3004023A4 /* ProfileCell.xib */; };
+		CE8335C326AAA9C4004023A4 /* PHAssetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8335C226AAA9C4004023A4 /* PHAssetExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		CE6952F326A96B0000E51D63 /* HeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		CE8335BC26AAA1F3004023A4 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		CE8335BD26AAA1F3004023A4 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
+		CE8335C226AAA9C4004023A4 /* PHAssetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetExtension.swift; sourceTree = "<group>"; };
 		D77214A74B02A01C6CD9AF2F /* Pods-CollectionViewCellExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionViewCellExample.debug.xcconfig"; path = "Target Support Files/Pods-CollectionViewCellExample/Pods-CollectionViewCellExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,6 +98,7 @@
 				CE65C83326A804F10061D3BB /* Application */,
 				CE65C83526A805710061D3BB /* Modules */,
 				CE65C83426A8050A0061D3BB /* Resources */,
+				CE8335C026AAA99F004023A4 /* Utils */,
 			);
 			path = CollectionViewCellExample;
 			sourceTree = "<group>";
@@ -155,6 +158,22 @@
 				CE8335BD26AAA1F3004023A4 /* ProfileCell.xib */,
 			);
 			path = ProfileCell;
+			sourceTree = "<group>";
+		};
+		CE8335C026AAA99F004023A4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CE8335C126AAA9B2004023A4 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CE8335C126AAA9B2004023A4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE8335C226AAA9C4004023A4 /* PHAssetExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,6 +298,7 @@
 				CE8335BE26AAA1F3004023A4 /* ProfileCell.swift in Sources */,
 				CE60ED7426A7FADE00D23F16 /* AppDelegate.swift in Sources */,
 				CE6952F426A96B0000E51D63 /* HeaderCollectionReusableView.swift in Sources */,
+				CE8335C326AAA9C4004023A4 /* PHAssetExtension.swift in Sources */,
 				CE60ED7626A7FADE00D23F16 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

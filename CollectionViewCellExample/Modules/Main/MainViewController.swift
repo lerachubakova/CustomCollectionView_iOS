@@ -25,6 +25,10 @@ class MainViewController: UIViewController {
         configureCollectionView()
     }
     
+    override func viewDidLayoutSubviews() {
+        reloadCollectionView()
+    }
+    
     private func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -34,6 +38,12 @@ class MainViewController: UIViewController {
         
         if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
             layout.delegate = self
+        }
+    }
+    
+    func reloadCollectionView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
         }
     }
     
@@ -104,7 +114,6 @@ extension MainViewController: UICollectionViewDataSource {
             if let myCell = cell as? MyCell {
                // print("cell: \(indexPath)")
                 myCell.setImage(photos[indexPath.item])
-                
                 if indexPath.item < urls.count {
                     myCell.setURL(urls[indexPath.item])
                     myCell.configurePlayer()
@@ -148,34 +157,11 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGSize {
-        if indexPath.item < photos.count {
+        if indexPath.item == 0 && indexPath.section == 0 {
+            return CGSize(width: view.frame.width, height: view.frame.height * 0.3)
+        } else if indexPath.item < photos.count {
             return photos[indexPath.item].size
         }
         return CGSize(width: 180, height: 180)
-    }
-}
-
-extension PHAsset {
-    func getURL(completionHandler : @escaping ((_ responseURL : URL?) -> Void)) {
-        if self.mediaType == .image {
-            let options: PHContentEditingInputRequestOptions = PHContentEditingInputRequestOptions()
-            options.canHandleAdjustmentData = {(_) -> Bool in
-                return true
-            }
-            self.requestContentEditingInput(with: options, completionHandler: {(contentEditingInput, _) -> Void in
-                completionHandler(contentEditingInput!.fullSizeImageURL as URL?)
-            })
-        } else if self.mediaType == .video {
-            let options: PHVideoRequestOptions = PHVideoRequestOptions()
-            options.version = .original
-            PHImageManager.default().requestAVAsset(forVideo: self, options: options, resultHandler: {(asset: AVAsset?, _: AVAudioMix?, _: [AnyHashable : Any]?) -> Void in
-                if let urlAsset = asset as? AVURLAsset {
-                    let localVideoUrl: URL = urlAsset.url as URL
-                    completionHandler(localVideoUrl)
-                } else {
-                    completionHandler(nil)
-                }
-            })
-        }
     }
 }
