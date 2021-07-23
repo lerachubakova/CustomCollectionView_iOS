@@ -9,13 +9,14 @@ import Photos
 import UIKit
 
 class MainViewController: UIViewController {
-
+    // MARK: - @IBOutlets
     @IBOutlet private weak var collectionView: UICollectionView!
     
     private var photos: [UIImage] = []
     private var urls: [URL?] = []
     private let photosCount = 70
     
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         makePhotosArray()
@@ -29,6 +30,7 @@ class MainViewController: UIViewController {
         reloadCollectionView()
     }
     
+    // MARK: - Setup
     private func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -81,9 +83,10 @@ class MainViewController: UIViewController {
         })
     }
 }
-
+// MARK: - UICollectionViewDelegate
 extension MainViewController: UICollectionViewDelegate {}
 
+// MARK: - UICollectionViewDataSource
 extension MainViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -155,6 +158,7 @@ extension MainViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - PinterestLayoutDelegate
 extension MainViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 && indexPath.section == 0 {

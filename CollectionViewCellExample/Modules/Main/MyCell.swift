@@ -9,6 +9,7 @@ import UIKit
 
 class MyCell: UICollectionViewCell {
     @IBOutlet private weak var imageView: UIImageView!
+    
     private var url: URL?
     private var player: AVPlayer?
     
@@ -23,6 +24,7 @@ class MyCell: UICollectionViewCell {
     func configurePlayer() {
         guard let url = url else { return }
         let player = AVPlayer(url: url)
+        player.actionAtItemEnd = .none
         self.player = player
         
         let playerLayer = AVPlayerLayer(player: player)
@@ -31,6 +33,10 @@ class MyCell: UICollectionViewCell {
     }
     
     func startPlayer() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(playerItemDidReachEnd(notification:)),
+                                               name: .AVPlayerItemDidPlayToEndTime,
+                                               object: player?.currentItem)
         self.player?.play()
     }
     
@@ -39,4 +45,9 @@ class MyCell: UICollectionViewCell {
         self.player = nil
     }
     
+    @objc func playerItemDidReachEnd(notification: Notification) {
+        if let playerItem = notification.object as? AVPlayerItem {
+            playerItem.seek(to: CMTime.zero, completionHandler: nil)
+        }
+    }
 }

@@ -35,7 +35,7 @@ protocol PinterestLayoutDelegate: AnyObject {
 }
 
 class PinterestLayout: UICollectionViewFlowLayout {
-
+    // MARK: - @IBOutlets
     weak var delegate: PinterestLayoutDelegate?
 
     private let numberOfColumns = 2
@@ -69,7 +69,8 @@ class PinterestLayout: UICollectionViewFlowLayout {
         }
         return true
     }
-  
+    
+    // MARK: - LifeCycle
     override func prepare() {
        // print("prepare")
         if let collectionView = collectionView {
@@ -147,7 +148,7 @@ class PinterestLayout: UICollectionViewFlowLayout {
         //    print(attributes)
         }
     }
-    
+    // MARK: - layoutAttributes
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
      
        // guard let layoutAttributes = super.layoutAttributesForElements(in: rect) else { return nil }

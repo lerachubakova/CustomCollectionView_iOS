@@ -123,8 +123,11 @@
 		CE65C83526A805710061D3BB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CE09300826A834AB0053098F /* PinterestLayout.swift */,
+				CE6952F626A96B0300E51D63 /* Header */,
 				CE60ED7E26A7FAE000D23F16 /* LaunchScreen.storyboard */,
 				CE65C83626A808AC0061D3BB /* Main */,
+				CE8335B726AAA1A1004023A4 /* ProfileCell */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -132,12 +135,9 @@
 		CE65C83626A808AC0061D3BB /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				CE8335B726AAA1A1004023A4 /* ProfileCell */,
-				CE6952F626A96B0300E51D63 /* Header */,
-				CE09300826A834AB0053098F /* PinterestLayout.swift */,
 				CE60ED7726A7FADE00D23F16 /* MainViewController.swift */,
-				CE60ED7926A7FADE00D23F16 /* Main.storyboard */,
 				CE37DC8526A842F2001AF0CA /* MyCell.swift */,
+				CE60ED7926A7FADE00D23F16 /* Main.storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
