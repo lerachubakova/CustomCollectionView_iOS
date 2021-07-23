@@ -14,7 +14,7 @@ class MainViewController: UIViewController {
     
     private var photos: [UIImage] = []
     private var urls: [URL?] = []
-    private let photosCount = 70
+    private let photosCount = 100
     
     // MARK: - LifeCycle
     override func viewDidLoad() {

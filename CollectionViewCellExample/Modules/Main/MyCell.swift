@@ -41,6 +41,9 @@ class MyCell: UICollectionViewCell {
     }
     
     func deletePlayer() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: .AVPlayerItemDidPlayToEndTime,
+                                                  object: player?.currentItem)
         imageView.layer.sublayers?.removeAll()
         self.player = nil
     }

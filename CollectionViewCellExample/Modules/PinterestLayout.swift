@@ -132,7 +132,7 @@ class PinterestLayout: UICollectionViewFlowLayout {
             let height = cellPadding * 2 + newHeight
             var frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
             
-            if indexPath.row == 0 || indexPath.row == 1 {
+            if indexPath.row < numberOfColumns {
                 yOffset[column] += firstCellHeight + headerHeight
                 frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
             }
@@ -169,12 +169,12 @@ class PinterestLayout: UICollectionViewFlowLayout {
             }
         }
         // TODO: uncomment for add section (with some bug, I don't know how to fix)
-//        for section in sectionsToAdd {
-//            let indexPath = IndexPath(item: 0, section: section)
-//            if let sectionAttributes = self.layoutAttributesForSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, at: indexPath) {
-//                newLayoutAttributes.append(sectionAttributes)
-//            }
-//        }
+        //        for section in sectionsToAdd {
+        //            let indexPath = IndexPath(item: 0, section: section)
+        //            if let sectionAttributes = self.layoutAttributesForSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, at: indexPath) {
+        //                newLayoutAttributes.append(sectionAttributes)
+        //            }
+        //        }
         
         //        print("###")
         //        print(array1 + array2)
@@ -184,16 +184,16 @@ class PinterestLayout: UICollectionViewFlowLayout {
         return newLayoutAttributes
     }
   
-//    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-//       let array1 = cache.filter { $0.frame.intersects(rect) }
-//       let array2 = headerLayoutAttributes.filter { $0.frame.intersects(rect) }
-//        return array1 + array2
-//    }
-    
-//    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-//        print("layoutAttributesForSupplementaryView")
-//        return headerLayoutAttributes[indexPath.section]
-//    }
+    //    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    //       let array1 = cache.filter { $0.frame.intersects(rect) }
+    //       let array2 = headerLayoutAttributes.filter { $0.frame.intersects(rect) }
+    //        return array1 + array2
+    //    }
+        
+    //    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+    //        print("layoutAttributesForSupplementaryView")
+    //        return headerLayoutAttributes[indexPath.section]
+    //    }
     
     func boundaries(forSection section: Int) -> (minimum: CGFloat, maximum: CGFloat)? {
         var result = (minimum: CGFloat(0.0), maximum: CGFloat(0.0))
