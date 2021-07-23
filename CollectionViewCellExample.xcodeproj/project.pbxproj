@@ -16,6 +16,10 @@
 		CE60ED7B26A7FADE00D23F16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE60ED7926A7FADE00D23F16 /* Main.storyboard */; };
 		CE60ED7D26A7FAE000D23F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE60ED7C26A7FAE000D23F16 /* Assets.xcassets */; };
 		CE60ED8026A7FAE000D23F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE60ED7E26A7FAE000D23F16 /* LaunchScreen.storyboard */; };
+		CE6952F426A96B0000E51D63 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6952F226A96B0000E51D63 /* HeaderCollectionReusableView.swift */; };
+		CE6952F526A96B0000E51D63 /* HeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6952F326A96B0000E51D63 /* HeaderCollectionReusableView.xib */; };
+		CE8335BE26AAA1F3004023A4 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8335BC26AAA1F3004023A4 /* ProfileCell.swift */; };
+		CE8335BF26AAA1F3004023A4 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8335BD26AAA1F3004023A4 /* ProfileCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +35,10 @@
 		CE60ED7C26A7FAE000D23F16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE60ED7F26A7FAE000D23F16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE60ED8126A7FAE000D23F16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE6952F226A96B0000E51D63 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		CE6952F326A96B0000E51D63 /* HeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionReusableView.xib; sourceTree = "<group>"; };
+		CE8335BC26AAA1F3004023A4 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		CE8335BD26AAA1F3004023A4 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
 		D77214A74B02A01C6CD9AF2F /* Pods-CollectionViewCellExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionViewCellExample.debug.xcconfig"; path = "Target Support Files/Pods-CollectionViewCellExample/Pods-CollectionViewCellExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,12 +129,32 @@
 		CE65C83626A808AC0061D3BB /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				CE8335B726AAA1A1004023A4 /* ProfileCell */,
+				CE6952F626A96B0300E51D63 /* Header */,
 				CE09300826A834AB0053098F /* PinterestLayout.swift */,
 				CE60ED7726A7FADE00D23F16 /* MainViewController.swift */,
 				CE60ED7926A7FADE00D23F16 /* Main.storyboard */,
 				CE37DC8526A842F2001AF0CA /* MyCell.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		CE6952F626A96B0300E51D63 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				CE6952F226A96B0000E51D63 /* HeaderCollectionReusableView.swift */,
+				CE6952F326A96B0000E51D63 /* HeaderCollectionReusableView.xib */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		CE8335B726AAA1A1004023A4 /* ProfileCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE8335BC26AAA1F3004023A4 /* ProfileCell.swift */,
+				CE8335BD26AAA1F3004023A4 /* ProfileCell.xib */,
+			);
+			path = ProfileCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,9 +216,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE6952F526A96B0000E51D63 /* HeaderCollectionReusableView.xib in Resources */,
 				CE60ED8026A7FAE000D23F16 /* LaunchScreen.storyboard in Resources */,
 				CE60ED7D26A7FAE000D23F16 /* Assets.xcassets in Resources */,
 				CE60ED7B26A7FADE00D23F16 /* Main.storyboard in Resources */,
+				CE8335BF26AAA1F3004023A4 /* ProfileCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,7 +276,9 @@
 				CE09300926A834AB0053098F /* PinterestLayout.swift in Sources */,
 				CE37DC8626A842F2001AF0CA /* MyCell.swift in Sources */,
 				CE60ED7826A7FADE00D23F16 /* MainViewController.swift in Sources */,
+				CE8335BE26AAA1F3004023A4 /* ProfileCell.swift in Sources */,
 				CE60ED7426A7FADE00D23F16 /* AppDelegate.swift in Sources */,
+				CE6952F426A96B0000E51D63 /* HeaderCollectionReusableView.swift in Sources */,
 				CE60ED7626A7FADE00D23F16 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
