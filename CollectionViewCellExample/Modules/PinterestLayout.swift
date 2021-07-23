@@ -40,7 +40,9 @@ class PinterestLayout: UICollectionViewFlowLayout {
 
     private let numberOfColumns = 2
     private let cellPadding: CGFloat = 5
-    private let headerHeight: CGFloat = 50 
+    
+    // TODO: height of section with bug (need 50)
+    private let headerHeight: CGFloat = 10
 
     private var cache: [UICollectionViewLayoutAttributes] = []
     private var headerLayoutAttributes: [UICollectionViewLayoutAttributes] = []
