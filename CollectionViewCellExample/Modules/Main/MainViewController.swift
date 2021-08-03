@@ -47,13 +47,13 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Logic
-    func reloadCollectionView() {
+    private func reloadCollectionView() {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
         }
     }
     
-    func checkAuthorization() {
+    private func checkAuthorization() {
         let status = PHLibraryAuthorizationManager.getPhotoLibraryAuthorizationStatus()
         switch status {
         case .notRequested:
@@ -65,7 +65,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    func makeAuthorizationRequest() {
+    private func makeAuthorizationRequest() {
         PHLibraryAuthorizationManager.requestPhotoLibraryAuthorization { [weak self] status in
             switch status {
             case .notRequested:
@@ -83,7 +83,7 @@ class MainViewController: UIViewController {
         }
     }
  
-    func makePhotosArray() {
+    private func makePhotosArray() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
         fetchOptions.fetchLimit = photosCount
@@ -95,7 +95,7 @@ class MainViewController: UIViewController {
         }
     }
 
-    func showOpenSettingsAlert(message: String) {
+    private func showOpenSettingsAlert(message: String) {
         let alert = UIAlertController(title: "Want to continue?", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { [weak self] _ in
             self?.openSettings()
@@ -103,14 +103,14 @@ class MainViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    func openSettings() {
+    private func openSettings() {
         let settingURLString = UIApplication.openSettingsURLString
         if let url = URL(string: settingURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     
-    func fetchPhotoAtIndex(_ index:Int, _ totalImageCountNeeded: Int, _ fetchResult: PHFetchResult<PHAsset>) {
+    private func fetchPhotoAtIndex(_ index:Int, _ totalImageCountNeeded: Int, _ fetchResult: PHFetchResult<PHAsset>) {
         let requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
         
