@@ -126,8 +126,6 @@
 				CE60ED7E26A7FAE000D23F16 /* LaunchScreen.storyboard */,
 				CE09300826A834AB0053098F /* PinterestLayout.swift */,
 				CE65C83626A808AC0061D3BB /* Main */,
-				CE6952F626A96B0300E51D63 /* Header */,
-				CE8335B726AAA1A1004023A4 /* ProfileCell */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -136,8 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				CE60ED7726A7FADE00D23F16 /* MainViewController.swift */,
-				CE37DC8526A842F2001AF0CA /* MyCell.swift */,
 				CE60ED7926A7FADE00D23F16 /* Main.storyboard */,
+				CE8C23C626B91FF400455B70 /* Views */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -174,6 +172,16 @@
 				CE8335C226AAA9C4004023A4 /* PHAssetExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CE8C23C626B91FF400455B70 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE37DC8526A842F2001AF0CA /* MyCell.swift */,
+				CE6952F626A96B0300E51D63 /* Header */,
+				CE8335B726AAA1A1004023A4 /* ProfileCell */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

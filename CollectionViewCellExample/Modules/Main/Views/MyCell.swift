@@ -25,6 +25,7 @@ class MyCell: UICollectionViewCell {
         guard let url = url else { return }
         let player = AVPlayer(url: url)
         player.actionAtItemEnd = .none
+        player.isMuted = true
         self.player = player
         
         let playerLayer = AVPlayerLayer(player: player)

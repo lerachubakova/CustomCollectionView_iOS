@@ -42,7 +42,7 @@ class PinterestLayout: UICollectionViewFlowLayout {
     private let cellPadding: CGFloat = 5
     
     // TODO: height of section with bug (need 50)
-    private let headerHeight: CGFloat = 10
+    private let headerHeight: CGFloat = 50
 
     private var cache: [UICollectionViewLayoutAttributes] = []
     private var headerLayoutAttributes: [UICollectionViewLayoutAttributes] = []
@@ -162,19 +162,22 @@ class PinterestLayout: UICollectionViewFlowLayout {
 
         for layoutAttributesSet in array1 {
             if layoutAttributesSet.representedElementCategory == .supplementaryView {
+             //   print("1")
                 sectionsToAdd.add(layoutAttributesSet.indexPath.section)
             } else if layoutAttributesSet.representedElementCategory == .cell {
+               // print("2")
                 newLayoutAttributes.append(layoutAttributesSet)
                 sectionsToAdd.add(layoutAttributesSet.indexPath.section)
             }
         }
         // TODO: uncomment for add section (with some bug, I don't know how to fix)
-        //        for section in sectionsToAdd {
-        //            let indexPath = IndexPath(item: 0, section: section)
-        //            if let sectionAttributes = self.layoutAttributesForSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, at: indexPath) {
-        //                newLayoutAttributes.append(sectionAttributes)
-        //            }
-        //        }
+//                for section in sectionsToAdd {
+//                    let indexPath = IndexPath(item: 0, section: section)
+//                    if let sectionAttributes = self.layoutAttributesForSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, at: indexPath) {
+//                        newLayoutAttributes.append(sectionAttributes)
+//                        print("here")
+//                    }
+//                }
         
         //        print("###")
         //        print(array1 + array2)

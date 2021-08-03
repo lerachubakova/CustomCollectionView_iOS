@@ -11,7 +11,7 @@ class ProfileCell: UICollectionViewCell {
 
     static let identifier = "profileCell"
     
-    static func nib() -> UINib {
+    func nib() -> UINib {
         return UINib(nibName: String(describing: Self.self), bundle: Bundle.main)
     }
     

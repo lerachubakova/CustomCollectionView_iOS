@@ -14,7 +14,7 @@ class MainViewController: UIViewController {
     
     private var photos: [UIImage] = []
     private var urls: [URL?] = []
-    private let photosCount = 100
+    private let photosCount = 30
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -35,14 +35,16 @@ class MainViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.register(HeaderCollectionReusableView.nib(),forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCollectionReusableView.identifier)
-        collectionView.register(ProfileCell.nib(), forCellWithReuseIdentifier: ProfileCell.identifier)
+        let headerKind = UICollectionView.elementKindSectionHeader
+        collectionView.register(HeaderCollectionReusableView().nib(),forSupplementaryViewOfKind: headerKind, withReuseIdentifier: HeaderCollectionReusableView.identifier)
+        collectionView.register(ProfileCell().nib(), forCellWithReuseIdentifier: ProfileCell.identifier)
         
         if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
             layout.delegate = self
         }
     }
     
+    // MARK: - Logic
     func reloadCollectionView() {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
@@ -69,6 +71,9 @@ class MainViewController: UIViewController {
         
         object.getURL(completionHandler: { [weak self] url in
             self?.urls.append(url)
+            if self?.urls.count == self?.photosCount {
+                self?.reloadCollectionView()
+            }
         })
         
         let mode = PHImageContentMode.aspectFill
