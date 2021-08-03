@@ -19,11 +19,7 @@ class MainViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        makePhotosArray()
-        if photos.count == 0 {
-            print("No access or empty library")
-        }
-        configureCollectionView()
+        checkAuthorization()
     }
     
     override func viewDidLayoutSubviews() {
@@ -32,6 +28,12 @@ class MainViewController: UIViewController {
     
     // MARK: - Setup
     private func configureCollectionView() {
+        makePhotosArray()
+        
+        if photos.count == 0 {
+            showOpenSettingsAlert(message: "There is no video in library or in the available media. \nYou can fix it in settings.")
+        }
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -51,6 +53,36 @@ class MainViewController: UIViewController {
         }
     }
     
+    func checkAuthorization() {
+        let status = PHLibraryAuthorizationManager.getPhotoLibraryAuthorizationStatus()
+        switch status {
+        case .notRequested:
+            makeAuthorizationRequest()
+        case .granted:
+            configureCollectionView()
+        case .unauthorized:
+            showOpenSettingsAlert(message: "Application needs access to one or more videos in library.")
+        }
+    }
+    
+    func makeAuthorizationRequest() {
+        PHLibraryAuthorizationManager.requestPhotoLibraryAuthorization { [weak self] status in
+            switch status {
+            case .notRequested:
+                break
+            case .granted:
+                DispatchQueue.main.async {
+                    self?.configureCollectionView()
+                }
+            case .unauthorized:
+                print(".unauthorized")
+                DispatchQueue.main.async {
+                    self?.showOpenSettingsAlert(message: "Application needs access to one or more videos in library.")
+                }
+            }
+        }
+    }
+ 
     func makePhotosArray() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
@@ -63,6 +95,21 @@ class MainViewController: UIViewController {
         }
     }
 
+    func showOpenSettingsAlert(message: String) {
+        let alert = UIAlertController(title: "Want to continue?", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { [weak self] _ in
+            self?.openSettings()
+        }))
+        self.present(alert, animated: true)
+    }
+    
+    func openSettings() {
+        let settingURLString = UIApplication.openSettingsURLString
+        if let url = URL(string: settingURLString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     func fetchPhotoAtIndex(_ index:Int, _ totalImageCountNeeded: Int, _ fetchResult: PHFetchResult<PHAsset>) {
         let requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true

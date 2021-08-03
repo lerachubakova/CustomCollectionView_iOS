@@ -21,6 +21,7 @@
 		CE8335BE26AAA1F3004023A4 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8335BC26AAA1F3004023A4 /* ProfileCell.swift */; };
 		CE8335BF26AAA1F3004023A4 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8335BD26AAA1F3004023A4 /* ProfileCell.xib */; };
 		CE8335C326AAA9C4004023A4 /* PHAssetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8335C226AAA9C4004023A4 /* PHAssetExtension.swift */; };
+		CE8C23C826B93E4800455B70 /* PHLibraryAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C23C726B93E4800455B70 /* PHLibraryAuthorizationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		CE8335BC26AAA1F3004023A4 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		CE8335BD26AAA1F3004023A4 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
 		CE8335C226AAA9C4004023A4 /* PHAssetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetExtension.swift; sourceTree = "<group>"; };
+		CE8C23C726B93E4800455B70 /* PHLibraryAuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHLibraryAuthorizationManager.swift; sourceTree = "<group>"; };
 		D77214A74B02A01C6CD9AF2F /* Pods-CollectionViewCellExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionViewCellExample.debug.xcconfig"; path = "Target Support Files/Pods-CollectionViewCellExample/Pods-CollectionViewCellExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,8 +125,8 @@
 		CE65C83526A805710061D3BB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CE8C23C726B93E4800455B70 /* PHLibraryAuthorizationManager.swift */,
 				CE60ED7E26A7FAE000D23F16 /* LaunchScreen.storyboard */,
-				CE09300826A834AB0053098F /* PinterestLayout.swift */,
 				CE65C83626A808AC0061D3BB /* Main */,
 			);
 			path = Modules;
@@ -133,6 +135,7 @@
 		CE65C83626A808AC0061D3BB /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				CE09300826A834AB0053098F /* PinterestLayout.swift */,
 				CE60ED7726A7FADE00D23F16 /* MainViewController.swift */,
 				CE60ED7926A7FADE00D23F16 /* Main.storyboard */,
 				CE8C23C626B91FF400455B70 /* Views */,
@@ -300,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8C23C826B93E4800455B70 /* PHLibraryAuthorizationManager.swift in Sources */,
 				CE09300926A834AB0053098F /* PinterestLayout.swift in Sources */,
 				CE37DC8626A842F2001AF0CA /* MyCell.swift in Sources */,
 				CE60ED7826A7FADE00D23F16 /* MainViewController.swift in Sources */,
