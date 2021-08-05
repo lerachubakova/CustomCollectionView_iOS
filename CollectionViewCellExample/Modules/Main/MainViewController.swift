@@ -157,11 +157,13 @@ extension MainViewController: UICollectionViewDataSource {
         switch indexPath.section {
         case 0:
             let profileCell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.identifier, for: indexPath)
+            profileCell.layer.cornerRadius = 7
             return profileCell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath)
             if let myCell = cell as? MyCell {
                 myCell.setImage(photos[indexPath.item])
+                myCell.layer.cornerRadius = 7
                 if indexPath.item < urls.count && needToPlay {
                     myCell.setURL(urls[indexPath.item])
                     myCell.configurePlayer()

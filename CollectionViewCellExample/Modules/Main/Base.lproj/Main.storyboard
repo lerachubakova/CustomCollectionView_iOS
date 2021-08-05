@@ -94,7 +94,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="imgMainBackground" width="1024" height="1024"/>
+        <image name="imgMainBackground" width="1080" height="2150"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

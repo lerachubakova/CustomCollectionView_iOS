@@ -170,7 +170,7 @@ class PinterestLayout: UICollectionViewFlowLayout {
     
     func boundaries(forSection section: Int) -> (minimum: CGFloat, maximum: CGFloat)? {
         var result = (minimum: CGFloat(0.0), maximum: CGFloat(0.0))
-
+        guard cellLayoutAttributes.count > 1 else { return result }
         let firstItem = cellLayoutAttributes[1]
         let lastItem = cellLayoutAttributes.last ?? cellLayoutAttributes[0]
         
