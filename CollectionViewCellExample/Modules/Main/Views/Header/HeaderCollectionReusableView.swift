@@ -27,8 +27,6 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     }
     
     @IBAction private func tap(_ sender: UISegmentedControl) {
-       // print("here")
-       // print(delegate)
         delegate?.didTappedSectionSegmentedControl(sender.selectedSegmentIndex)
     }
 }

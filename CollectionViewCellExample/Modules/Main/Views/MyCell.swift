@@ -49,6 +49,7 @@ class MyCell: UICollectionViewCell {
         self.player = nil
     }
     
+    // for repeating player
     @objc func playerItemDidReachEnd(notification: Notification) {
         if let playerItem = notification.object as? AVPlayerItem {
             playerItem.seek(to: CMTime.zero, completionHandler: nil)

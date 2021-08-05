@@ -28,6 +28,36 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Setup
+    private func checkAuthorization() {
+        let status = PHLibraryAuthorizationManager.getPhotoLibraryAuthorizationStatus()
+        switch status {
+        case .notRequested:
+            makeAuthorizationRequest()
+        case .granted:
+            configureCollectionView()
+        case .unauthorized:
+            showOpenSettingsAlert(message: "Application needs access to one or more videos in library.")
+        }
+    }
+    
+    // MARK: - Logic
+    private func makeAuthorizationRequest() {
+        PHLibraryAuthorizationManager.requestPhotoLibraryAuthorization { [weak self] status in
+            switch status {
+            case .notRequested:
+                break
+            case .granted:
+                DispatchQueue.main.async {
+                    self?.configureCollectionView()
+                }
+            case .unauthorized:
+                DispatchQueue.main.async {
+                    self?.showOpenSettingsAlert(message: "Application needs access to one or more videos in library.")
+                }
+            }
+        }
+    }
+    
     private func configureCollectionView() {
         makePhotosArray()
         
@@ -47,55 +77,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    // MARK: - Logic
-    func reloadCollectionView() {
-        DispatchQueue.main.async { [weak self] in
-            self?.collectionView.reloadData()
-        }
-    }
-    
-    private func checkAuthorization() {
-        let status = PHLibraryAuthorizationManager.getPhotoLibraryAuthorizationStatus()
-        switch status {
-        case .notRequested:
-            makeAuthorizationRequest()
-        case .granted:
-            configureCollectionView()
-        case .unauthorized:
-            showOpenSettingsAlert(message: "Application needs access to one or more videos in library.")
-        }
-    }
-    
-    private func makeAuthorizationRequest() {
-        PHLibraryAuthorizationManager.requestPhotoLibraryAuthorization { [weak self] status in
-            switch status {
-            case .notRequested:
-                break
-            case .granted:
-                DispatchQueue.main.async {
-                    self?.configureCollectionView()
-                }
-            case .unauthorized:
-                print(".unauthorized")
-                DispatchQueue.main.async {
-                    self?.showOpenSettingsAlert(message: "Application needs access to one or more videos in library.")
-                }
-            }
-        }
-    }
- 
-    private func makePhotosArray() {
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
-        fetchOptions.fetchLimit = photosCount
-
-        let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.video, options: fetchOptions)
-
-        if fetchResult.count > 0 {
-            fetchPhotoAtIndex(0, fetchOptions.fetchLimit, fetchResult)
-        }
-    }
-
     private func showOpenSettingsAlert(message: String) {
         let alert = UIAlertController(title: "Want to continue?", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { [weak self] _ in
@@ -108,6 +89,24 @@ class MainViewController: UIViewController {
         let settingURLString = UIApplication.openSettingsURLString
         if let url = URL(string: settingURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func reloadCollectionView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+        }
+    }
+    
+    private func makePhotosArray() {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
+        fetchOptions.fetchLimit = photosCount
+
+        let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.video, options: fetchOptions)
+
+        if fetchResult.count > 0 {
+            fetchPhotoAtIndex(0, fetchOptions.fetchLimit, fetchResult)
         }
     }
     
@@ -159,14 +158,9 @@ extension MainViewController: UICollectionViewDataSource {
         case 0:
             let profileCell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.identifier, for: indexPath)
             return profileCell
-//            print(profileCell)
-//            print("myBlack: \(indexPath)")
-//            print("my: black myCell: \(indexPath)")
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath)
             if let myCell = cell as? MyCell {
-               // print("cell: \(indexPath)")
-              //  myCell.layer.cornerRadius = 10
                 myCell.setImage(photos[indexPath.item])
                 if indexPath.item < urls.count && needToPlay {
                     myCell.setURL(urls[indexPath.item])
@@ -197,16 +191,15 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCollectionReusableView.identifier, for: indexPath)
-       // print("was here \(sectionHeader as? HeaderCollectionReusableView)")
         if let header = sectionHeader as? HeaderCollectionReusableView, indexPath.section == 1 {
             header.delegate = self
-        // print("my: header \(indexPath)")
             return header
         }
         return sectionHeader
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // no scrolling outside
         if scrollView.contentOffset.y < 0 {
              scrollView.contentOffset.y = 0
         } else if scrollView.contentSize.height - scrollView.contentOffset.y < scrollView.frame.size.height {
@@ -218,6 +211,7 @@ extension MainViewController: UICollectionViewDataSource {
 // MARK: - PinterestLayoutDelegate
 extension MainViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGSize {
+        // height of cells
         if indexPath.item == 0 && indexPath.section == 0 {
             return CGSize(width: view.frame.width, height: view.frame.height * 0.3)
         } else if indexPath.item < photos.count {
@@ -233,5 +227,4 @@ extension MainViewController: HeaderCollectionReusableViewDelegate {
         self.needToPlay = segment == 0
         self.reloadCollectionView()
     }
- 
 }
