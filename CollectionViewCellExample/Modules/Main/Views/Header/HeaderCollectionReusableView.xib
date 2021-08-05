@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,23 +15,33 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcu-vA-OaE">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                    <state key="normal" title="Button"/>
-                </button>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="17v-xK-aXk">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
+                    <color key="backgroundColor" red="0.62429931754506296" green="0.62266472479526225" blue="0.65121698861170296" alpha="0.88408039421435225" colorSpace="custom" customColorSpace="sRGB"/>
+                    <segments>
+                        <segment title="Play"/>
+                        <segment title="Stop"/>
+                    </segments>
+                    <color key="selectedSegmentTintColor" systemColor="systemGray6Color"/>
+                    <connections>
+                        <action selector="tap:" destination="U6b-Vx-4bR" eventType="valueChanged" id="d5A-Et-1DQ"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
-            <color key="backgroundColor" red="1" green="0.96078431369999995" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Zcu-vA-OaE" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="8xc-s0-SUu"/>
-                <constraint firstItem="Zcu-vA-OaE" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="PDf-qE-Nh6"/>
-                <constraint firstAttribute="trailing" secondItem="Zcu-vA-OaE" secondAttribute="trailing" id="UDv-Fl-GrB"/>
-                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="Zcu-vA-OaE" secondAttribute="bottom" id="oCW-O3-RFu"/>
+                <constraint firstItem="17v-xK-aXk" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="A19-fO-mzm"/>
+                <constraint firstAttribute="trailing" secondItem="17v-xK-aXk" secondAttribute="trailing" id="AMO-p8-uqn"/>
+                <constraint firstItem="17v-xK-aXk" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="Jqe-le-Z5t"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="17v-xK-aXk" secondAttribute="bottom" id="u21-jo-y92"/>
             </constraints>
-            <connections>
-                <outlet property="headerButton" destination="Zcu-vA-OaE" id="AZU-69-55F"/>
-            </connections>
             <point key="canvasLocation" x="132" y="94"/>
         </collectionReusableView>
     </objects>
+    <resources>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

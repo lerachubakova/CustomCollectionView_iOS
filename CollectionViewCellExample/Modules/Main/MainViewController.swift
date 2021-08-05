@@ -14,7 +14,8 @@ class MainViewController: UIViewController {
     
     private var photos: [UIImage] = []
     private var urls: [URL?] = []
-    private let photosCount = 30
+    private var photosCount = 30
+    private var needToPlay = false
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -47,7 +48,7 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Logic
-    private func reloadCollectionView() {
+    func reloadCollectionView() {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
         }
@@ -146,12 +147,9 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0:
-            return 1
-        case 1:
-            return photos.count
-        default:
-            break
+        case 0: return 1
+        case 1: return photos.count
+        default: break
         }
         return 0
     }
@@ -168,8 +166,9 @@ extension MainViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath)
             if let myCell = cell as? MyCell {
                // print("cell: \(indexPath)")
+              //  myCell.layer.cornerRadius = 10
                 myCell.setImage(photos[indexPath.item])
-                if indexPath.item < urls.count {
+                if indexPath.item < urls.count && needToPlay {
                     myCell.setURL(urls[indexPath.item])
                     myCell.configurePlayer()
                 }
@@ -181,21 +180,27 @@ extension MainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let myCell = cell as? MyCell {
+        if let myCell = cell as? MyCell, needToPlay {
             myCell.deletePlayer()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let myCell = cell as? MyCell {
-            myCell.startPlayer()
+            if needToPlay {
+                myCell.startPlayer()
+            } else {
+                myCell.deletePlayer()
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCollectionReusableView.identifier, for: indexPath)
-        if let header = sectionHeader as? HeaderCollectionReusableView, indexPath.section == 0 {
-       //   print("my: header \(indexPath)")
+       // print("was here \(sectionHeader as? HeaderCollectionReusableView)")
+        if let header = sectionHeader as? HeaderCollectionReusableView, indexPath.section == 1 {
+            header.delegate = self
+        // print("my: header \(indexPath)")
             return header
         }
         return sectionHeader
@@ -220,4 +225,13 @@ extension MainViewController: PinterestLayoutDelegate {
         }
         return CGSize(width: 180, height: 180)
     }
+}
+
+// MARK: - HeaderCollectionReusableViewDelegate
+extension MainViewController: HeaderCollectionReusableViewDelegate {
+    func didTappedSectionSegmentedControl(_ segment: Int) {
+        self.needToPlay = segment == 0
+        self.reloadCollectionView()
+    }
+ 
 }

@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol HeaderCollectionReusableViewDelegate: AnyObject {
+    func didTappedSectionSegmentedControl(_ segment: Int)
+}
+
 class HeaderCollectionReusableView: UICollectionReusableView {
 
     @IBOutlet private weak var headerButton: UIButton!
+    weak var delegate: HeaderCollectionReusableViewDelegate?
     
     static let identifier = "header"
     
@@ -21,8 +26,9 @@ class HeaderCollectionReusableView: UICollectionReusableView {
         super.awakeFromNib()
     }
     
-    @IBAction private func tap() {
-        print("tap")
+    @IBAction private func tap(_ sender: UISegmentedControl) {
+       // print("here")
+       // print(delegate)
+        delegate?.didTappedSectionSegmentedControl(sender.selectedSegmentIndex)
     }
-    
 }
