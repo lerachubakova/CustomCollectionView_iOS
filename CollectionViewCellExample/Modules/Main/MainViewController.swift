@@ -116,6 +116,8 @@ final class MainViewController: UIViewController {
         print("\n LOG photos:", photos.count)
         
         print("\n LOG urls:", urls.count)
+        
+        self.reloadCollectionView()
         print()
     }
     
@@ -127,7 +129,7 @@ final class MainViewController: UIViewController {
         
         object.getURL(completionHandler: { [unowned self] url in
             self.urls.append(url)
-            if self.urls.count == self.photosCount {
+            if self.urls.count == self.photosCount || self.urls.count == fetchResult.count {
                 self.reloadCollectionView()
             }
         })
@@ -137,6 +139,10 @@ final class MainViewController: UIViewController {
             
             if let image = image {
                 self.photos += [image]
+            }
+            
+            if self.photos.count == self.photosCount || self.urls.count == self.photos.count {
+                self.reloadCollectionView()
             }
             
             print("\t LOG index:", index, "photos:", self.photos.count, "urls:", self.urls.count)
