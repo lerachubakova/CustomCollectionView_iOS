@@ -101,14 +101,20 @@ final class MainViewController: UIViewController {
     private func makePhotosArray() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
-        print("#\(photosCount)")
+        print("\n LOG photosCount:", photosCount)
         fetchOptions.fetchLimit = photosCount
 
         let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.video, options: fetchOptions)
-        print("#\(fetchResult.count)")
+        
+        print("\n LOG fetchResult:", fetchResult.count)
         if fetchResult.count > 0 {
             fetchPhotoAtIndex(0, fetchOptions.fetchLimit, fetchResult)
         }
+       
+        print("\n LOG photos:", photos.count)
+        
+        print("\n LOG urls:", urls.count)
+        print()
     }
     
     private func fetchPhotoAtIndex(_ index:Int, _ totalImageCountNeeded: Int, _ fetchResult: PHFetchResult<PHAsset>) {
