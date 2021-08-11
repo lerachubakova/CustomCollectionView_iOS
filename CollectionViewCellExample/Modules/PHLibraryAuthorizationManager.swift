@@ -16,7 +16,7 @@ enum PhotoLibraryAuthorizationStatus {
 
 typealias RequestPhotoLibraryAuthCompletionHandler = (PhotoLibraryAuthorizationStatus) -> Void
 
-class PHLibraryAuthorizationManager {
+final class PHLibraryAuthorizationManager {
     
     static func requestPhotoLibraryAuthorization(completionHandler: @escaping RequestPhotoLibraryAuthCompletionHandler) {
         DispatchQueue.main.async {

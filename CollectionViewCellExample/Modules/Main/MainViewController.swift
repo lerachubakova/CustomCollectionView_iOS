@@ -8,10 +8,11 @@
 import Photos
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     // MARK: - @IBOutlets
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    // MARK: - Private Properties
     private var photos: [UIImage] = []
     private var urls: [URL?] = []
     private var photosCount = 30
@@ -20,6 +21,8 @@ class MainViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
+        collectionView.dataSource = self
         checkAuthorization()
     }
     
@@ -40,6 +43,22 @@ class MainViewController: UIViewController {
         }
     }
     
+    private func configureCollectionView() {
+        let headerKind = UICollectionView.elementKindSectionHeader
+        collectionView.register(HeaderCollectionReusableView().nib(),forSupplementaryViewOfKind: headerKind, withReuseIdentifier: HeaderCollectionReusableView.identifier)
+        collectionView.register(ProfileCell().nib(), forCellWithReuseIdentifier: ProfileCell.identifier)
+        
+        makePhotosArray()
+        
+        if photos.count == 0 {
+            showOpenSettingsAlert(message: "There is no video in library or in the available media. \nYou can fix it in settings.")
+        }
+        
+        if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
+            layout.delegate = self
+        }
+    }
+    
     // MARK: - Logic
     private func makeAuthorizationRequest() {
         PHLibraryAuthorizationManager.requestPhotoLibraryAuthorization { [weak self] status in
@@ -55,25 +74,6 @@ class MainViewController: UIViewController {
                     self?.showOpenSettingsAlert(message: "Application needs access to one or more videos in library.")
                 }
             }
-        }
-    }
-    
-    private func configureCollectionView() {
-        makePhotosArray()
-        
-        if photos.count == 0 {
-            showOpenSettingsAlert(message: "There is no video in library or in the available media. \nYou can fix it in settings.")
-        }
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        let headerKind = UICollectionView.elementKindSectionHeader
-        collectionView.register(HeaderCollectionReusableView().nib(),forSupplementaryViewOfKind: headerKind, withReuseIdentifier: HeaderCollectionReusableView.identifier)
-        collectionView.register(ProfileCell().nib(), forCellWithReuseIdentifier: ProfileCell.identifier)
-        
-        if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
-            layout.delegate = self
         }
     }
     
@@ -101,10 +101,11 @@ class MainViewController: UIViewController {
     private func makePhotosArray() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
+        print("#\(photosCount)")
         fetchOptions.fetchLimit = photosCount
 
         let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.video, options: fetchOptions)
-
+        print("#\(fetchResult.count)")
         if fetchResult.count > 0 {
             fetchPhotoAtIndex(0, fetchOptions.fetchLimit, fetchResult)
         }
@@ -136,7 +137,9 @@ class MainViewController: UIViewController {
     }
 }
 // MARK: - UICollectionViewDelegate
-extension MainViewController: UICollectionViewDelegate {}
+extension MainViewController: UICollectionViewDelegate {
+    
+}
 
 // MARK: - UICollectionViewDataSource
 extension MainViewController: UICollectionViewDataSource {

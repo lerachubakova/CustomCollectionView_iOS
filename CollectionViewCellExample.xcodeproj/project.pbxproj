@@ -20,7 +20,7 @@
 		CE6952F526A96B0000E51D63 /* HeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6952F326A96B0000E51D63 /* HeaderCollectionReusableView.xib */; };
 		CE8335BE26AAA1F3004023A4 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8335BC26AAA1F3004023A4 /* ProfileCell.swift */; };
 		CE8335BF26AAA1F3004023A4 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8335BD26AAA1F3004023A4 /* ProfileCell.xib */; };
-		CE8335C326AAA9C4004023A4 /* PHAssetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8335C226AAA9C4004023A4 /* PHAssetExtension.swift */; };
+		CE8335C326AAA9C4004023A4 /* PHAssetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8335C226AAA9C4004023A4 /* PHAssetExtensions.swift */; };
 		CE8C23C826B93E4800455B70 /* PHLibraryAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C23C726B93E4800455B70 /* PHLibraryAuthorizationManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +41,7 @@
 		CE6952F326A96B0000E51D63 /* HeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		CE8335BC26AAA1F3004023A4 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		CE8335BD26AAA1F3004023A4 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
-		CE8335C226AAA9C4004023A4 /* PHAssetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetExtension.swift; sourceTree = "<group>"; };
+		CE8335C226AAA9C4004023A4 /* PHAssetExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetExtensions.swift; sourceTree = "<group>"; };
 		CE8C23C726B93E4800455B70 /* PHLibraryAuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHLibraryAuthorizationManager.swift; sourceTree = "<group>"; };
 		D77214A74B02A01C6CD9AF2F /* Pods-CollectionViewCellExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionViewCellExample.debug.xcconfig"; path = "Target Support Files/Pods-CollectionViewCellExample/Pods-CollectionViewCellExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,7 +172,7 @@
 		CE8335C126AAA9B2004023A4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CE8335C226AAA9C4004023A4 /* PHAssetExtension.swift */,
+				CE8335C226AAA9C4004023A4 /* PHAssetExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -310,7 +310,7 @@
 				CE8335BE26AAA1F3004023A4 /* ProfileCell.swift in Sources */,
 				CE60ED7426A7FADE00D23F16 /* AppDelegate.swift in Sources */,
 				CE6952F426A96B0000E51D63 /* HeaderCollectionReusableView.swift in Sources */,
-				CE8335C326AAA9C4004023A4 /* PHAssetExtension.swift in Sources */,
+				CE8335C326AAA9C4004023A4 /* PHAssetExtensions.swift in Sources */,
 				CE60ED7626A7FADE00D23F16 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

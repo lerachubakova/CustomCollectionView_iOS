@@ -11,9 +11,9 @@ protocol HeaderCollectionReusableViewDelegate: AnyObject {
     func didTappedSectionSegmentedControl(_ segment: Int)
 }
 
-class HeaderCollectionReusableView: UICollectionReusableView {
-
+final class HeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet private weak var headerButton: UIButton!
+    
     weak var delegate: HeaderCollectionReusableViewDelegate?
     
     static let identifier = "header"

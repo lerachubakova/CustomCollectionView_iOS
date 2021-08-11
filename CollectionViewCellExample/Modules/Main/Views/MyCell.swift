@@ -7,7 +7,7 @@
 import AVFoundation
 import UIKit
 
-class MyCell: UICollectionViewCell {
+final class MyCell: UICollectionViewCell {
     @IBOutlet private weak var imageView: UIImageView!
     
     private var url: URL?

@@ -34,8 +34,8 @@ protocol PinterestLayoutDelegate: AnyObject {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGSize
 }
 
-class PinterestLayout: UICollectionViewFlowLayout {
-    // MARK: - @IBOutlets
+final class PinterestLayout: UICollectionViewFlowLayout {
+    // MARK: - Properties
     weak var delegate: PinterestLayoutDelegate?
 
     private let numberOfColumns = 2
@@ -144,7 +144,7 @@ class PinterestLayout: UICollectionViewFlowLayout {
         }
     }
     
-    // MARK: - layoutAttributes
+    // MARK: - LayoutAttributes
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let array1 = cellLayoutAttributes.filter { $0.frame.intersects(rect) }
       
