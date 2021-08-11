@@ -107,6 +107,8 @@ final class MainViewController: UIViewController {
         let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.video, options: fetchOptions)
         
         print("\n LOG fetchResult:", fetchResult.count)
+        print()
+        
         if fetchResult.count > 0 {
             fetchPhotoAtIndex(0, fetchOptions.fetchLimit, fetchResult)
         }
@@ -123,19 +125,22 @@ final class MainViewController: UIViewController {
         
         let object = fetchResult.object(at: index) as PHAsset
         
-        object.getURL(completionHandler: { [weak self] url in
-            self?.urls.append(url)
-            if self?.urls.count == self?.photosCount {
-                self?.reloadCollectionView()
+        object.getURL(completionHandler: { [unowned self] url in
+            self.urls.append(url)
+            if self.urls.count == self.photosCount {
+                self.reloadCollectionView()
             }
         })
         
         let mode = PHImageContentMode.aspectFill
-        PHImageManager.default().requestImage(for: object, targetSize: view.frame.size, contentMode: mode, options: requestOptions, resultHandler: { [weak self] (image, _) in
-            guard let self = self else { return }
+        PHImageManager.default().requestImage(for: object, targetSize: view.frame.size, contentMode: mode, options: requestOptions, resultHandler: { [unowned self] (image, _) in
+            
             if let image = image {
                 self.photos += [image]
             }
+            
+            print("\t LOG index:", index, "photos:", self.photos.count, "urls:", self.urls.count)
+            
             if index + 1 < fetchResult.count && self.photos.count < totalImageCountNeeded {
                 self.fetchPhotoAtIndex(index + 1, totalImageCountNeeded, fetchResult)
             }
