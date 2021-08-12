@@ -13,8 +13,8 @@ final class MainViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     
     // MARK: - Private Properties
-    private var photos: [UIImage] = []
-    private var urls: [URL] = []
+    private var photos: [UIImage?] = []
+    private var urls: [URL?] = []
     private var photosCount = 30
     private var needToPlay = false
     
@@ -47,7 +47,7 @@ final class MainViewController: UIViewController {
     }
     
     private func configureCollectionView() {
-        // FIXME: 4 video 
+        // FIXME: 4 video
         makePhotosArray()
         
         if photos.count == 0 {
@@ -132,8 +132,8 @@ final class MainViewController: UIViewController {
         let object = fetchResult.object(at: index) as PHAsset
         
         object.getURL(completionHandler: { [unowned self] url in
+            self.urls.append(url)
             if let url = url {
-                self.urls.append(url)
                 print("\t LOG url.count += 1 \(url)")
             } else {
                 print("\t LOG url is nil")
@@ -141,14 +141,17 @@ final class MainViewController: UIViewController {
 
             if urls.count == photosCount || urls.count == photos.count {
                 reloadCollectionView()
+                print("\n LOG photos after all URL:", photos)
+                print("\n LOG urls after all URL:", urls)
             }
         })
         
         let mode = PHImageContentMode.aspectFill
         PHImageManager.default().requestImage(for: object, targetSize: view.frame.size, contentMode: mode, options: requestOptions, resultHandler: { [unowned self] (image, some) in
 
+            self.photos.append(image)
+            
             if let image = image {
-                self.photos.append(image)
                 print("\t LOG image.count += 1 \(image)")
             } else {
                 print("\t LOG image is nil \(String(describing: some))")
@@ -246,7 +249,7 @@ extension MainViewController: PinterestLayoutDelegate {
         if indexPath.item == 0 && indexPath.section == 0 {
             return CGSize(width: view.frame.width, height: view.frame.height * 0.3)
         } else if indexPath.item < photos.count {
-            return photos[indexPath.item].size
+            return photos[indexPath.item]?.size ?? CGSize(width: view.frame.width, height: view.frame.height * 0.3)
         }
         return CGSize(width: 180, height: 180)
     }

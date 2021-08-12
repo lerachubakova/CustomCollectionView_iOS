@@ -13,8 +13,8 @@ final class MyCell: UICollectionViewCell {
     private var url: URL?
     private var player: AVPlayer?
     
-    func setImage(_ img: UIImage) {
-        imageView.image = img
+    func setImage(_ img: UIImage?) {
+        imageView.image =  img ?? UIImage(named: "imgDefaultImage")
     }
     
     func setURL(_ url: URL?) {
