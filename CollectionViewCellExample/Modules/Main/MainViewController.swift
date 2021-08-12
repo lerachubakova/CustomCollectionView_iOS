@@ -47,6 +47,7 @@ final class MainViewController: UIViewController {
     }
     
     private func configureCollectionView() {
+        // FIXME: 4 video 
         makePhotosArray()
         
         if photos.count == 0 {
