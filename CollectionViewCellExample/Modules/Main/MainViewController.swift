@@ -14,7 +14,7 @@ final class MainViewController: UIViewController {
     
     // MARK: - Private Properties
     private var photos: [UIImage] = []
-    private var urls: [URL?] = []
+    private var urls: [URL] = []
     private var photosCount = 30
     private var needToPlay = false
     
@@ -23,6 +23,9 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        let headerKind = UICollectionView.elementKindSectionHeader
+        collectionView.register(HeaderCollectionReusableView().nib(),forSupplementaryViewOfKind: headerKind, withReuseIdentifier: HeaderCollectionReusableView.identifier)
+        collectionView.register(ProfileCell().nib(), forCellWithReuseIdentifier: ProfileCell.identifier)
         checkAuthorization()
     }
     
@@ -44,10 +47,6 @@ final class MainViewController: UIViewController {
     }
     
     private func configureCollectionView() {
-        let headerKind = UICollectionView.elementKindSectionHeader
-        collectionView.register(HeaderCollectionReusableView().nib(),forSupplementaryViewOfKind: headerKind, withReuseIdentifier: HeaderCollectionReusableView.identifier)
-        collectionView.register(ProfileCell().nib(), forCellWithReuseIdentifier: ProfileCell.identifier)
-        
         makePhotosArray()
         
         if photos.count == 0 {
@@ -94,6 +93,8 @@ final class MainViewController: UIViewController {
     
     func reloadCollectionView() {
         DispatchQueue.main.async { [weak self] in
+            print(" LOG reload Collection View:")
+
             self?.collectionView.reloadData()
         }
     }
@@ -101,16 +102,16 @@ final class MainViewController: UIViewController {
     private func makePhotosArray() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
-        print("\n LOG photosCount:", photosCount)
+        print(" LOG photosCount:", photosCount)
         fetchOptions.fetchLimit = photosCount
 
         let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.video, options: fetchOptions)
         
-        print("\n LOG fetchResult:", fetchResult.count)
+        print(" LOG fetchResult:", fetchResult.count)
         print()
         
         if fetchResult.count > 0 {
-            fetchPhotoAtIndex(0, fetchOptions.fetchLimit, fetchResult)
+            fetchPhotoAtIndex(0, photosCount, fetchResult)
         }
        
         print("\n LOG photos:", photos.count)
@@ -121,31 +122,38 @@ final class MainViewController: UIViewController {
         print()
     }
     
-    private func fetchPhotoAtIndex(_ index:Int, _ totalImageCountNeeded: Int, _ fetchResult: PHFetchResult<PHAsset>) {
+    private func fetchPhotoAtIndex(_ index: Int, _ totalImageCountNeeded: Int, _ fetchResult: PHFetchResult<PHAsset>) {
+        print("\n LOG fetchPhotoAtIndex \(index) \(totalImageCountNeeded):")
+
         let requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
         
         let object = fetchResult.object(at: index) as PHAsset
         
         object.getURL(completionHandler: { [unowned self] url in
-            self.urls.append(url)
-            if self.urls.count == self.photosCount || self.urls.count == fetchResult.count {
-                self.reloadCollectionView()
+            if let url = url {
+                self.urls.append(url)
+                print("\t LOG url.count += 1 \(url)")
+            } else {
+                print("\t LOG url is nil")
+            }
+
+            if urls.count == photosCount || urls.count == photos.count {
+                reloadCollectionView()
             }
         })
         
         let mode = PHImageContentMode.aspectFill
-        PHImageManager.default().requestImage(for: object, targetSize: view.frame.size, contentMode: mode, options: requestOptions, resultHandler: { [unowned self] (image, _) in
-            
+        PHImageManager.default().requestImage(for: object, targetSize: view.frame.size, contentMode: mode, options: requestOptions, resultHandler: { [unowned self] (image, some) in
+
             if let image = image {
-                self.photos += [image]
+                self.photos.append(image)
+                print("\t LOG image.count += 1 \(image)")
+            } else {
+                print("\t LOG image is nil \(String(describing: some))")
             }
             
-            if self.photos.count == self.photosCount || self.urls.count == self.photos.count {
-                self.reloadCollectionView()
-            }
-            
-            print("\t LOG index:", index, "photos:", self.photos.count, "urls:", self.urls.count)
+            print(" LOG final fetchPhotoAtIndex: ", index, "photos:", self.photos.count, "urls:", self.urls.count)
             
             if index + 1 < fetchResult.count && self.photos.count < totalImageCountNeeded {
                 self.fetchPhotoAtIndex(index + 1, totalImageCountNeeded, fetchResult)
