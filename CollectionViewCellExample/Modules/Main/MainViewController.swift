@@ -94,8 +94,7 @@ final class MainViewController: UIViewController {
     
     func reloadCollectionView() {
         DispatchQueue.main.async { [weak self] in
-            print(" LOG reload Collection View:")
-
+            print(" LOG reload Collection View")
             self?.collectionView.reloadData()
         }
     }
@@ -116,8 +115,7 @@ final class MainViewController: UIViewController {
         }
        
         print("\n LOG photos:", photos.count)
-        
-        print("\n LOG urls:", urls.count)
+        print(" LOG urls:", urls.count)
         
         self.reloadCollectionView()
         print()
