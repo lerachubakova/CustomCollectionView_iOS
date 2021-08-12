@@ -124,7 +124,7 @@ final class MainViewController: UIViewController {
     }
     
     private func fetchPhotoAtIndex(_ index: Int, _ totalImageCountNeeded: Int, _ fetchResult: PHFetchResult<PHAsset>) {
-        print("\n LOG fetchPhotoAtIndex \(index) \(totalImageCountNeeded):")
+        print("\n LOG fetchPhotoAtIndex \(index) \(totalImageCountNeeded) \(fetchResult.count):")
 
         let requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
@@ -157,7 +157,7 @@ final class MainViewController: UIViewController {
                 print("\t LOG image is nil \(String(describing: some))")
             }
             
-            print(" LOG final fetchPhotoAtIndex: ", index, "photos:", self.photos.count, "urls:", self.urls.count)
+            print(" LOG final fetchPhotoAtIndex:", index, "photos:", self.photos.count, "urls:", self.urls.count)
             
             if index + 1 < fetchResult.count && self.photos.count < totalImageCountNeeded {
                 self.fetchPhotoAtIndex(index + 1, totalImageCountNeeded, fetchResult)
